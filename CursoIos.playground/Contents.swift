@@ -264,3 +264,172 @@ let names:[String] = ["Ana","Pepe","Luis"]
 print(names)
 print(names[2])
 
+var daysOfTheWeek: [String] = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+daysOfTheWeek[3] = "Juernes"
+print(daysOfTheWeek)
+print(daysOfTheWeek[0])
+
+daysOfTheWeek.remove(at: 0)
+print(daysOfTheWeek[0])
+
+
+daysOfTheWeek.append("Pendientes")
+print(daysOfTheWeek)
+
+// Comentario mac -> Windows + Shift + k 
+
+// Bucles
+// Busca en que posición se encuentra el día lunes
+
+
+var daysOfTheWeek2: [String] = ["Lunes","Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
+
+for string in daysOfTheWeek2 {
+    if string == "Lunes" {
+        print("El lunes está en la posición \(daysOfTheWeek2.firstIndex(of: string)!)")
+    }
+}
+
+for i in daysOfTheWeek2{
+    print("Jaime: \(i) ")
+}
+
+var count = 0
+while count < 10 {
+    print("Hola soy un contadoy y valgo \(count)")
+    count += 1
+}
+
+var count2 = 5
+repeat{
+    print("Pepe")
+}while count2 < 0
+        
+        
+for string in daysOfTheWeek2 {
+    if string == "Jueves" {
+        print("Es Jueves")
+        break
+    }
+    else {
+        print("No es jueves")
+    }
+}
+
+/*
+ 
+ 
+ Ejercicio #7
+ Escribe una función que reciba un numero e imprima su tabla de multiplicar
+ 
+ 
+ */
+
+func tablaDeMultiplicar(_ num:Int){
+    for i in 1...10{
+        print("\(num) x \(i) = \(num*i)")
+    }
+}
+
+tablaDeMultiplicar(5)
+
+/*
+ 
+ 
+ Ejercicio 8
+ Escribe un programa que calcule la suma de todos los número pares del 1 al 100
+ y muestre el resultado. Para saber si un número es par se tiene que dar la siguiente condición
+ (numero % 2 == 0)
+ 
+ 
+ */
+
+func sumaCienNumeros(){
+    var suma4 = 0
+    for i in 1...100{
+        if i % 2 == 0{
+            suma4 = suma4 + i
+        }
+    }
+    print("El resultado es \(suma4)")
+}
+sumaCienNumeros()
+
+
+
+/*
+ 
+ 
+ Ejercicio 9
+ Escribe una función que cuente el número de vocales en una palabra y lo pinte
+ TIP: Las palabras (strings) puedes recorrerlos con el bucle for
+ 
+ 
+ */
+
+
+func contarPalabras(_ palabra:String){
+    var countPalabra = 0
+    for i in palabra{
+        switch i.lowercased(){
+        case "a","e","i","o","u":
+            countPalabra += 1
+        default:continue
+        }
+    }
+    print("La palabra tiene \(countPalabra) vocales")
+}
+
+contarPalabras("Jaime")
+
+
+
+
+// Tuplas y diccionarios
+
+var tupla = ("Jaime",31,true,"Calle mi casa",666666,1.87)
+print(tupla.4)
+
+// Diccionarios
+
+var dicc:[String: Any] = [ "Nombre":"Jaime","Edad":28,"Direccion":" calle mi casa","Altura":1.78 ]
+
+for (key,value) in dicc{
+    print("\(key): \(value)")
+}
+
+// Clases
+
+
+class Persona{
+    
+    var name:String
+    var age:Int
+    
+    init(name:String , age:Int){
+        self.name = name
+        self.age = age
+    }
+    
+    func saludar(){
+        print("Hola soy \(name) y tengo \(age) anos. ")
+    }
+}
+
+var JaimeObjeto:Persona = Persona(name:"Jaime",age:28)
+var PepeObjeto:Persona = Persona(name:"Pepe",age:88)
+
+JaimeObjeto.saludar()
+PepeObjeto.saludar()
+
+// Struct
+
+struct ExampleStruct{
+    var name:String
+    var age:Int
+}
+
+var ejemploStruct:ExampleStruct = ExampleStruct(name:"Andés",age:28)
+
+print("Soy Jaime")
+
