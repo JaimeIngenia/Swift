@@ -9,6 +9,8 @@ import SwiftUI
 
 struct IMCView: View {
     
+    @State var gender:Int = 1
+    @State var height:Double = 150
   /*  init(){
         UINavigationBar.appearance()
             .titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -16,7 +18,13 @@ struct IMCView: View {
     */
     var body: some View {
         VStack{
-            Text("Es verdad")
+            HStack{
+                ToggleButton(text: "Jaime", imageName: "heart.fill", gender:0, selectedGender: $gender)
+                ToggleButton(text: "Jaime", imageName: "heart.fill", gender:1, selectedGender: $gender)
+            }
+            
+            HeightCalculator(selectedHeight: $height)
+            
         }
         .frame(maxWidth:.infinity, maxHeight: .infinity)
             .background(.backgroundApp)
@@ -39,24 +47,76 @@ struct ToggleButton: View {
     
     let text:String
     let imageName:String
-    let index:Int
+    let gender:Int
+    @Binding var selectedGender: Int
     
     var body: some View {
-        Button(action: {}){
+        let color = if(gender == selectedGender){
+            Color.backgroundComponentSelected
+        }else{
+            Color.backgroundComponent
+        }
+        
+        Button(action: {
+            selectedGender = gender
+        }){
             VStack
             {
                 Image(systemName: imageName)
                     .resizable()
-                    .frame(width: 60, height: 60)
-                Text(text)
-                // Subiendo a GitHub
-            }
+                    .scaledToFit()
+                    .frame(height: 100)
+                    .foregroundColor(.white)
+                InformationText(text: text)
+            }.frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(color)
+            
         }
     }
     
     
 }
 
+
+struct InformationText : View {
+    let text:String
+    var body: some View {
+        Text(text)
+            .font(.largeTitle)
+            .bold()
+            .foregroundColor(.white)
+    }
+}
+
+struct TitleText:View {
+    let text:String
+    var body: some View{
+        Text(text)
+            .font(.title2)
+            .bold()
+            .foregroundColor(.gray)
+    }
+}
+
+
+
+struct HeightCalculator: View {
+    @Binding var selectedHeight:Double
+    var body: some View {
+        VStack{
+            TitleText(text: "Altura")
+            InformationText(text: "\(Int(selectedHeight)) cm")
+            Slider(value: $selectedHeight , in: 100...220, step: 1)
+                .accentColor(.purple)
+                .padding(.horizontal,16)
+        }.frame(maxWidth : .infinity, maxHeight: .infinity)
+            .background(.backgroundComponent)
+    }
+}
+
+
+
 #Preview {
-    ToggleButton(text: "Jaime", imageName: "heart.fill", index:0)
+    
+    IMCView()
 }
