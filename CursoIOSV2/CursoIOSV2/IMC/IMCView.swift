@@ -11,6 +11,8 @@ struct IMCView: View {
     
     @State var gender:Int = 1
     @State var height:Double = 150
+    @State var age:Int = 18
+    @State var weight:Int = 80
   /*  init(){
         UINavigationBar.appearance()
             .titleTextAttributes = [.foregroundColor: UIColor.white]
@@ -24,6 +26,14 @@ struct IMCView: View {
             }
             
             HeightCalculator(selectedHeight: $height)
+            HStack{
+                CounterButton(text:"Edad", number: $age )
+                CounterButton(text:"Peso", number: $weight )
+            }
+            IMCCalculateButton()
+            
+            
+            
             
         }
         .frame(maxWidth:.infinity, maxHeight: .infinity)
@@ -36,6 +46,24 @@ struct IMCView: View {
                         .foregroundColor(.white)
                 }
             }
+    }
+}
+
+// Componente boton final
+
+struct IMCCalculateButton:View {
+    var body: some View{
+        NavigationStack{
+            NavigationLink(destination:{}){
+                Text("Calcular")
+                    .font(.title)
+                    .bold()
+                    .foregroundColor(.purple)
+                    .frame(maxWidth: .infinity, maxHeight: 100)
+                    .background(.backgroundComponent)
+                
+            }
+        }
     }
 }
 
@@ -114,7 +142,53 @@ struct HeightCalculator: View {
     }
 }
 
-
+struct CounterButton: View {
+    let text:String
+    @Binding var number: Int
+    var body: some View{
+        VStack{
+            TitleText(text:text)
+            InformationText(text: String(number) )
+            HStack{
+                Button(action:{
+                    if (number > 0){
+                        number -= 1
+                    }
+                }){
+                    ZStack{
+                        Circle()
+                            .frame(width:70,height:70)
+                            .foregroundColor(.purple)
+                        Image(systemName: "minus")
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundColor(.white)
+                            .frame(width: 25, height: 25)
+                    }
+                }
+                
+                Button(action:{
+                    if (number < 100){
+                        number += 1
+                    }
+                }){
+                    ZStack{
+                        Circle()
+                            .frame(width:70,height:70)
+                            .foregroundColor(.purple)
+                        Image(systemName: "plus")
+                            .resizable()
+                            .foregroundColor(.white)
+                            .frame(width: 25, height: 25)
+                    }
+                }
+                
+                
+            }
+        }.frame(maxWidth : .infinity, maxHeight: .infinity)
+            .background(.backgroundComponent)
+    }
+}
 
 #Preview {
     
