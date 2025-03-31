@@ -11,17 +11,20 @@ struct MenuView: View {
     var body: some View {
         NavigationStack{
             // A partir de aqui se va a navegar
-            VStack{
+            List{
                 
                 NavigationLink(destination: {IMCView()}
                 ){
                     Text("Ir a IMC View")
                 }
+                NavigationLink(destination:SuperheroSearcher()){
+                    Text("Super Hero Finder")
+                }
                 
-                Text("IMC Calculator")
-                Text("App 2")
-                Text("App 2")
-                Text("App 2")
+                Text("App")
+                Text("App")
+                Text("App")
+                Text("App")
             }
         }
     }
