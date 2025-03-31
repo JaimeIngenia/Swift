@@ -30,7 +30,7 @@ struct IMCView: View {
                 CounterButton(text:"Edad", number: $age )
                 CounterButton(text:"Peso", number: $weight )
             }
-            IMCCalculateButton()
+            IMCCalculateButton(userWeight: Double(weight), userHeight: height)
             
             
             
@@ -52,9 +52,13 @@ struct IMCView: View {
 // Componente boton final
 
 struct IMCCalculateButton:View {
+    let userWeight:Double
+    let userHeight:Double
     var body: some View{
         NavigationStack{
-            NavigationLink(destination:{}){
+            NavigationLink(destination:{
+                IMCResult(userWeight:userWeight, userHeight:userHeight)
+            }){
                 Text("Calcular")
                     .font(.title)
                     .bold()
