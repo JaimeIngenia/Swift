@@ -30,10 +30,12 @@ class ApiNetwork {
     struct SuperheroCompleted:Codable{
         let id:String
         let name:String
+        let image:ImageSuperhero
         let powerstats:Powerstats
         let biography:Biography
     }
     
+
     struct Powerstats:Codable{
         let intelligence:String
         let strength:String
