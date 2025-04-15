@@ -124,9 +124,23 @@ struct FavPlaces: View {
                 LazyHStack{
                     
                     ForEach(places){ place in
+                        let color = if place.fav{Color.yellow.opacity(0.5)} else{
+                            Color.black.opacity(0.5)
+                        }
                         VStack{
                             Text(place.name)
-                        }.frame(width: 200, height: 150)
+                                .font(.title3)
+                                .bold()
+                        }.frame(width: 150, height: 100)
+                            .overlay{
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(color,lineWidth: 1)
+                            }.shadow(radius: 5)
+                            .padding(.horizontal, 8)
+                            .onTapGesture {
+                                animateCamera(coordinates: place.coordinates)
+                                showSheet = false
+                            }
                     }
                 }
             }.presentationDetents(Set(height))
@@ -142,6 +156,17 @@ struct FavPlaces: View {
         name = ""
         fav = false
         showPopUp = nil
+    }
+    
+    func animateCamera(coordinates: CLLocationCoordinate2D){
+        withAnimation{
+            position = MapCameraPosition.region(
+                MKCoordinateRegion(
+                    center: coordinates,
+                    span: MKCoordinateSpan(latitudeDelta:1, longitudeDelta:1)
+                )
+            )
+        }
     }
     
 }
