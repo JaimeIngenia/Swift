@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct MainView: View {
+    //Cargamos desde UserDefaults si ya se vio la vista
+    @State private var hasSeenOnBoarding: Bool = UserDefaults.standard.bool(forKey: "hasSeenOnBoarding")
+    
+    
     var body: some View {
-        MenuView()
+        
+        if hasSeenOnBoarding {
+            MenuView()
+        }else{
+            WelcomeView(hasSeenOnboarding: $hasSeenOnBoarding)
+        }
+        
     }
 }
 
